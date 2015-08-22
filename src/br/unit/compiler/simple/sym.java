@@ -15,5 +15,25 @@ public interface sym {
   public static final int NUMBER = 5;
   public static final int TIMES = 3;
   public static final int EOF = 0;
+  
+  //PALAVRAS RESERVADAS
+  public static final int READ = 6;
+  public static final int WRITE = 7;
+  public static final int IF = 8;
+  public static final int ELSE = 9;
+  public static final int ELIF = 10;
+  public static final int WHILE = 11;
+  public static final int INT = 12;
+  public static final int BOOL = 13;
+  public static final int VOID = 14;
+  public static final int AND = 15;
+  public static final int OR = 16;
+  public static final int NOT = 17;
+  public static final int PASS = 18;
+  public static final int TRUE = 19;
+  public static final int FALSE = 20;
+  
+  //ESPACÇO EM BRANCO
+  public static final int ESPACOBRANCO = 20;
 }
 

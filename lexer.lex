@@ -31,12 +31,15 @@ ALPHA      = [A-Za-z]
 DIGIT      = [0-9] 
 NUMBER     = {DIGIT}+ (("."|",") {DIGIT}+)? (("e"|"E") ("+"|"-")? {DIGIT}+ )?  
 IDENTIFIER = {ALPHA}({ALPHA}|{DIGIT}|_)* 
-
+COMENTARIO = ("{"){ALPHA}{DIGIT}{NUMBER}+("}") 
 
 
 %%
 
 {ESPACOBRANCO} {}
+
+{COMENTARIO}   { return new Symbol(sym.COMENTARIO,new String(yytext())); }
+
 //PALAVRAS RESERVADAS
 
 {READ}	     { return new Symbol(sym.READ,new String(yytext())); }

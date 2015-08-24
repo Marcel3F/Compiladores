@@ -35,5 +35,6 @@ public interface sym {
   
   //ESPACÇO EM BRANCO
   public static final int ESPACOBRANCO = 20;
+  public static final int COMENTARIO = 21;
 }
 

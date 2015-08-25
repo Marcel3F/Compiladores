@@ -1,2 +1,16 @@
-read 
-TRUE
+int fat_rec(int n):
+ if n < 2:
+ fat_rec := 1
+else:
+ fat_rec := n * fat_rec(n - 1)
+
+int fat_loop(int n):
+ fat_loop := 1
+ while n > 1:
+  fat_loop := fat_loop * n
+  n := n - 1
+
+void main():
+ read x
+ write fat_rec(x)
+ write fat_loop(x)

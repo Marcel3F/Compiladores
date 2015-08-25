@@ -12,6 +12,7 @@ public interface sym {
   public static final int ID = 4;
   public static final int error = 1;
   public static final int PLUS = 2;
+  public static final int SUB = 28;
   public static final int NUMBER = 5;
   public static final int TIMES = 3;
   public static final int EOF = 0;
@@ -19,22 +20,34 @@ public interface sym {
   //PALAVRAS RESERVADAS
   public static final int READ = 6;
   public static final int WRITE = 7;
+  
   public static final int IF = 8;
   public static final int ELSE = 9;
   public static final int ELIF = 10;
   public static final int WHILE = 11;
+  
   public static final int INT = 12;
   public static final int BOOL = 13;
+  
   public static final int VOID = 14;
+  
   public static final int AND = 15;
   public static final int OR = 16;
   public static final int NOT = 17;
   public static final int PASS = 18;
+  
   public static final int TRUE = 19;
   public static final int FALSE = 20;
   
-  //ESPACÇO EM BRANCO
+  //OUTROS
   public static final int ESPACOBRANCO = 20;
   public static final int COMENTARIO = 21;
+  public static final int ABREPARENTESE = 22;
+  public static final int FECHAPARENTESE = 23;
+  public static final int DOISPONTOS = 24;
+  public static final int ATRIBUICAO = 25;
+  public static final int MENORQUE = 25;
+  public static final int MAIORQUE = 26;
+  public static final int IGUAL = 27;
 }
 

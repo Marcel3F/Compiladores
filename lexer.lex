@@ -1,14 +1,39 @@
 package br.unit.compiler.simple;
 import java_cup.runtime.Symbol;
 import br.unit.compiler.simple.*;
+import java.util.Stack;
+import java.io.StringReader;
+
 
 %%
 
 %class Lexer
-%cup
+%cup 
 %public
 %line
 %column
+
+
+%{	
+
+	Stack<Integer> levels;
+	
+	private Symbol symbol(int type) {
+        return new Symbol(type, yyline, yycolumn);
+    }
+    private Symbol symbol(int type, Object value) {
+        return new Symbol(type, yyline, yycolumn, value);
+    }
+    
+    private void initStack(){
+	  levels = new Stack<Integer>();
+	  levels.push(0);
+	}
+%}
+
+%init{
+  initStack();
+%init}
 
 
 READ       = [rR][eE][aA][dD]
@@ -32,7 +57,7 @@ PASS       = [pP][aA][sS][sS]
 TRUE       = [tT][rR][uU][eE]
 FALSE	   = [fF][aA][lL][sS][eE]
 
-ESPACOBRANCO = [ \n\t\r\f]+
+ESPACOBRANCO = [ \n]
 
 ALPHA      = [A-Za-z] 
 DIGIT      = [0-9] 
@@ -42,6 +67,23 @@ COMENTARIO = ("{"){ALPHA}{DIGIT}{NUMBER}+("}")
 
 
 %%
+
+\n[ ]*[^ ]              {
+                        yypushback(1); 
+ 						int level = yytext().length()-1;
+ 						int curr = levels.peek();
+ 						
+ 						if(level > curr) {
+ 						  levels.push(level);
+ 						  return new Symbol(sym.BEGIN, yyline);
+ 						} else if(level < curr) {
+						  levels.pop();
+						  yypushback(level+1);
+						  return new Symbol(sym.END, yyline);
+ 						} else {
+ 						  // não faz nada!
+ 						}
+                      } 
 
 {ESPACOBRANCO} {}
 
@@ -95,5 +137,4 @@ COMENTARIO = ("{"){ALPHA}{DIGIT}{NUMBER}+("}")
 "="          { return new Symbol(sym.IGUAL); }
 
 .            { System.out.println("Illegal character: <" + yytext() + ">"); }
-
 

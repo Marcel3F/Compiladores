@@ -49,5 +49,8 @@ public interface sym {
   public static final int MENORQUE = 25;
   public static final int MAIORQUE = 26;
   public static final int IGUAL = 27;
+  
+  public static final int BEGIN = 28;
+  public static final int END = 29;
 }
 

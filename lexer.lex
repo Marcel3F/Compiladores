@@ -57,7 +57,7 @@ PASS       = [pP][aA][sS][sS]
 TRUE       = [tT][rR][uU][eE]
 FALSE	   = [fF][aA][lL][sS][eE]
 
-ESPACOBRANCO = [ \n]
+ESPACOBRANCO = [ \t\r]+
 
 ALPHA      = [A-Za-z] 
 DIGIT      = [0-9] 
@@ -75,11 +75,11 @@ COMENTARIO = ("{"){ALPHA}{DIGIT}{NUMBER}+("}")
  						
  						if(level > curr) {
  						  levels.push(level);
- 						  return new Symbol(sym.BEGIN, yyline);
+ 						  return new Symbol(sym.BEGIN, "Begin");
  						} else if(level < curr) {
 						  levels.pop();
 						  yypushback(level+1);
-						  return new Symbol(sym.END, yyline);
+						  return new Symbol(sym.END, "End");
  						} else {
  						  // não faz nada!
  						}
@@ -116,25 +116,25 @@ COMENTARIO = ("{"){ALPHA}{DIGIT}{NUMBER}+("}")
 
 {IDENTIFIER} { return new Symbol(sym.ID,new String(yytext())); }
 
-"+"          { return new Symbol(sym.PLUS); }
+"+"          { return new Symbol(sym.PLUS,new String(yytext())); }
 
-"-"          { return new Symbol(sym.SUB); }
+"-"          { return new Symbol(sym.SUB,new String(yytext())); }
 
-"*"          { return new Symbol(sym.TIMES); }
+"*"          { return new Symbol(sym.TIMES,new String(yytext())); }
 
-"("          { return new Symbol(sym.ABREPARENTESE); }
+"("          { return new Symbol(sym.ABREPARENTESE,new String(yytext())); }
 
-")"          { return new Symbol(sym.FECHAPARENTESE); }
+")"          { return new Symbol(sym.FECHAPARENTESE,new String(yytext())); }
 
-":"          { return new Symbol(sym.DOISPONTOS); }
+":"          { return new Symbol(sym.DOISPONTOS,new String(yytext())); }
 
-":="          { return new Symbol(sym.ATRIBUICAO); }
+":="          { return new Symbol(sym.ATRIBUICAO,new String(yytext())); }
 
-"<"          { return new Symbol(sym.MENORQUE); }
+"<"          { return new Symbol(sym.MENORQUE,new String(yytext())); }
 
-">"          { return new Symbol(sym.MAIORQUE); }
+">"          { return new Symbol(sym.MAIORQUE,new String(yytext())); }
 
-"="          { return new Symbol(sym.IGUAL); }
+"="          { return new Symbol(sym.IGUAL,new String(yytext())); }
 
 .            { System.out.println("Illegal character: <" + yytext() + ">"); }
 
